@@ -1,23 +1,21 @@
+# src/utils.py
 import os
-import config
- 
+import config # configモジュールをインポート
+
 def create_directories():
-    os.makedirs(config.BASE_DIR, exist_ok=True)
-    os.makedirs(config.OUTPUT_DIR, exist_ok=True)
-    os.makedirs(config.REAL_TIME_DIR, exist_ok=True)
-    os.makedirs(config.HISTORICAL_DIR, exist_ok=True)
-    os.makedirs(config.TIME_SERIES_DIR, exist_ok=True)
- 
-def verify_directories():
-    print(f"BASE_DIR: {config.BASE_DIR}")
-    print(f"OUTPUT_DIR: {config.OUTPUT_DIR}")
-    print(f"REAL_TIME_DIR: {config.REAL_TIME_DIR}")
-    print(f"HISTORICAL_DIR: {config.HISTORICAL_DIR}")
-    print(f"TIME_SERIES_DIR: {config.TIME_SERIES_DIR}")
- 
+    """config.pyで定義された全ディレクトリを作成"""
+    for directory in config.ALL_DIRS:
+        os.makedirs(directory, exist_ok=True)
+    print(f"Ensured directories exist: {config.ALL_DIRS}")
+
 def verify_api_key():
-    api_key = os.environ.get("TRADERMADE_API_KEY")
-    if not api_key:
-        print("TRADERMADE_API_KEY is not set. Please set the environment variable.")
+    """環境変数からAPIキーを確認"""
+    if not config.API_KEY:
+        print("ERROR: TRADERMADE_API_KEY 環境変数が設定されていません。")
+        print(".envファイルに TRADERMADE_API_KEY=YOUR_API_KEY の形式で設定してください。")
         return False
+    print("TRADERMADE_API_KEY が環境変数に見つかりました。")
     return True
+
+# 他のコードとの互換性のためのエイリアス
+verify_api_key_environment = verify_api_key
