@@ -1,8 +1,4 @@
 import os
-from dotenv import load_dotenvpi
-
-# Load environment variables from .env file
-load_dotenv()
 
 # --- Base Configuration ---
 BASE_DIR = r"M:\ML\Finance\tradermade_cfd" # Modify this path if necessary
@@ -35,3 +31,6 @@ ALL_DIRS = [
 # This needs adjustment based on available data and desired analysis
 SPOT_TICKER = 'XAUUSD' # Example: Gold Spot
 FUTURES_TICKER = 'USOIL' # Example: WTI Crude Oil CFD as futures proxy
+CRYPTO_TICKER = 'BTCUSD'  # 例: ビットコイン
+INDEX_TICKER = 'SPX500'   # 例: S&P 500
+CURRENCY_TICKER = 'EURUSD' # 例: ユーロ/米ドル
