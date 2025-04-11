@@ -37,3 +37,30 @@ This project fetches, processes, and displays CFD data from the TraderMade API.
     *   現物価格、先物価格、ベーシス、ベーシス率、年率換算ベーシス、市場レジームなどの主要なメトリクスを抽出・整形します。
     *   IPython/Jupyter 環境で、これらのメトリクスを HTML グリッド形式で見やすく表示します。
     *   (注意: このスクリプトは主に Jupyter Notebook (`src/view.ipynb`) や IPython コンソールでの使用を想定しています。)
+
+## 実行例
+
+プロジェクトのルートディレクトリから以下のコマンドを順番に実行します。
+
+```bash
+# 1. データの取得と保存
+python src/main_fetch.py
+
+# 2. データの統合
+python src/data_integrator.py
+
+# 3. 指標の計算
+python src/indicator_calculator.py
+
+# 4. 結果の表示 (Jupyter Notebook推奨)
+# src/view.ipynb を開いてセルを実行してください。
+# または、IPython環境で以下を実行:
+# python src/view.py
+```
+
+### 期待される出力
+
+*   **ステップ1後**: `data/real_time`, `data/historical`, `data/time_series` ディレクトリに Parquet ファイルが生成されます。
+*   **ステップ2後**: `data/output` ディレクトリに `integrated_data_*.parquet` ファイルが生成されます。
+*   **ステップ3後**: `data/indicator` ディレクトリに `indicator_data_*.parquet` ファイルが生成されます。また、`data_processor.py` がメトリクスを計算・保存する場合、`data/processed_metrics` に `calculated_metrics_*.parquet` が生成されているはずです（`indicator_calculator.py` の入力として使用されます）。
+*   **ステップ4後**: Jupyter Notebook (`src/view.ipynb`) または IPython 環境で、最新のメトリクスが整形されたHTML形式で表示されます。
